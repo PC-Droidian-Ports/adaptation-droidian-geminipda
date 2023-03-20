@@ -1,0 +1,1 @@
+Download vendor.img from https://gitlab.com/ubports/porting/community-ports/android9/planet-geminipda/planet-geminipda/-/tree/master/overlay/system/var/lib/lxc/android/vendor.img

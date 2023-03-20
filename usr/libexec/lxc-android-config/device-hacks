@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Turn off Caps Lock blue LED
+echo "7 0 0 0 " > /proc/aw9120_operation
+
+# Wait for the property system to be up.
+while [ ! -e /dev/socket/property_service ]; do sleep 0.1; done
+
+# Set front camera orientation
+setprop aal.camera.orientations.0 90
+
+# Wait for nvram to be loaded.
+while [ "$(getprop service.nvram_init)" != "Ready" ]; do sleep 0.2; done
+while [ "$(getprop service.wcn.driver.ready)" != "yes" ]; do sleep 0.2; done
+
+# enable Wi-Fi adapter in client mode
+while [ ! -e /dev/wmtWifi ]; do sleep 0.2; done
+echo S > /dev/wmtWifi
+
+# set wifi.interface property since urfkill.conf expects that
+setprop wifi.interface wlan0

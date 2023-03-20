@@ -1,0 +1,10 @@
+#
+# ADDITIONAL_DEFAULT_PROPERTIES
+#
+ro.secure=1
+security.perf_harden=1
+ro.allow.mock.location=0
+ro.debuggable=1
+#
+# Has to be false for telephony to work on Gemini PDA
+ro.actionable_compatible_property.enabled=false

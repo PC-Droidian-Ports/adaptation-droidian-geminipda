@@ -1,0 +1,16 @@
+script
+    mkdir -p /dev/cpuset
+    mount none /dev/cpuset -t cpuset -o nodev,noexec,nosuid
+
+    /usr/sbin/mount-android.sh
+
+    # set ro.actionable_compatible_property.enabled=false
+    mount -o bind /usr/share/halium-overlay/system/etc/prop.default /var/lib/lxc/android/rootfs/system/etc/prop.default
+
+    # Store updates on userdata partition
+    umount /android/cache || true
+    mkdir -p /userdata/cache
+    mount -o bind /userdata/cache /android/cache
+
+    initctl emit -n mounted-android
+end script
